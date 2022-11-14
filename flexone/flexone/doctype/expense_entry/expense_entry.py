@@ -69,6 +69,17 @@ class ExpenseEntry(AccountsController):
 		self.set_status()
 
 	def on_cancel(self):
+		# from frappe.utils.change_log import get_app_branch
+		# erpnext_version=get_app_branch('erpnext')
+		# if erpnext_version=='version-13':
+		# from erpnext.accounts.general_ledger import make_reverse_gl_entries
+		# self.ignore_linked_doctypes = ("GL Entry", "Stock Ledger Entry")
+		# make_reverse_gl_entries(voucher_type=self.doctype, voucher_no=self.name)
+		# from erpnext.accounts.doctype.gl_entry.gl_entry import rename_temporarily_named_docs
+		# rename_temporarily_named_docs("GL Entry")				
+
+		#  added below line of ignore for v13
+		self.ignore_linked_doctypes = ("GL Entry", "Stock Ledger Entry")
 		self.make_gl_entries(cancel=True)
 		self.set_status()
 
